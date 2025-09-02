@@ -1,0 +1,675 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Academia Online | Consultora CSI </title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #f5f7fa 0%, #c3d9f5 100%);
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .top-bar {
+      background: #222;
+      color: #eee;
+      font-size: 14px;
+      padding: 6px 40px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .top-bar a {
+      color: #eee;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .top-bar a:hover {
+      color: #ff4081;
+    }
+
+    header {
+      background: url('https://imgur.com/aoIvPQp.jpg') center/cover no-repeat;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      font-family: 'Montserrat', sans-serif;
+      flex-shrink: 0;
+    }
+.menu-toggle img {
+  width: 1px;   /* ancho de la imagen del toggle */
+  height: 0.2px;  /* alto de la imagen del toggle */
+  cursor: pointer;
+}
+     .logo img {
+  height: 80px;
+  border-radius: 10px; 
+}
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a {
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff4081;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+      user-select: none;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        position: fixed;
+        top: 54px;
+        right: 0;
+        background: #1c1c1c;
+        height: calc(100vh - 54px);
+        width: 220px;
+        flex-direction: column;
+        padding: 40px 20px;
+        gap: 20px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 2000;
+      }
+
+      nav ul.show {
+        transform: translateX(0);
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    main {
+      flex-grow: 1;
+      padding: 40px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.activo {
+      display: block;
+    }
+
+    .banner {
+      background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c') center/cover no-repeat;
+      color: white;
+      padding: 120px 40px;
+      text-align: center;
+      position: relative;
+      border-radius: 10px;
+      margin-bottom: 40px;
+    }
+
+    .banner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      z-index: 0;
+    }
+
+    .banner-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .banner h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .banner p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .btn-primary {
+      background: #3f72af;
+      color: white;
+      padding: 12px 24px;
+      margin-top: 30px;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: #27496d;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .card {
+      background: #fff;
+      width: 300px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-body h4 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .card-body p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    footer {
+      background: #27496d;
+      text-align: center;
+      padding: 20px 40px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    form#form-unete {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    form#form-unete label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    form#form-unete input[type='text'],
+    form#form-unete input[type='email'] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 16px;
+      border: 1.5px solid #3f72af;
+      border-radius: 6px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    form#form-unete input[type='file'] {
+      display: none;
+    }
+
+    form#form-unete button#btn-select-file {
+      display: inline-block;
+      background-color: #3f72af;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    form#form-unete button#btn-select-file:hover {
+      background-color: #27496d;
+    }
+
+    form#form-unete #file-name {
+      font-style: italic;
+      color: #555;
+      display: block;
+      margin-bottom: 20px;
+    }
+
+    form#form-unete button[type='submit'] {
+      display: block;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    /* Estilos CSI Clientes */
+    #csi-clientes h3 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #3f72af;
+    }
+
+    #csi-clientes #cv-upload-section input,
+    #csi-clientes #cv-upload-section button {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #3f72af;
+      font-size: 14px;
+    }
+
+    #csi-clientes #cv-upload-section button {
+      background: #3f72af;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #csi-clientes #cv-upload-section button:hover {
+      background: #27496d;
+    }
+
+    #csi-clientes #cv-list li {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    #csi-clientes #cv-list li a {
+      color: #27496d;
+      text-decoration: none;
+    }
+
+    #csi-clientes #cv-list li a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-bar">
+    <a href="https://www.facebook.com/consultoracsi" aria-label="Facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+    <a href="https://www.instagram.com/consultoracsi/" aria-label="Instagram" target="_blank" rel="nopener noreferrer">Instagram</a>
+    <a href="https://wa.me/5493584120044" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    <a href="https://www.linkedin.com/in/natalia-vilar-504a59113/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+  </div>
+
+<header>
+  <div class="logo">
+    <img src="https://imgur.com/skIIvlg.jpg" alt="CSI Consultora Logo">
+  </div>
+
+  <nav>
+    <!-- Toggle con imagen -->
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <img src="https://imgur.com/tuImagenToggle.png" alt="Menú">
+    </div>
+
+    <ul id="menu">
+      <li><a onclick="mostrarSeccion('inicio')">Inicio</a></li>
+      <li><a onclick="mostrarSeccion('cursos')">Cursos</a></li>
+      <li><a onclick="mostrarSeccion('info')">Quiénes Somos</a></li>
+      <li><a onclick="mostrarSeccion('unete')">Únete a nuestro equipo</a></li>
+      <li><a onclick="mostrarSeccion('Contratá con Nosotros')">Contratá con Nosotros</a></li>
+    </ul>
+  </nav>
+</header>
+
+<style>
+  /* Logo más grande */
+  .logo img {
+    height: 100px; /* tamaño que quieras */
+    border-radius: 40px;
+    width: 150px;
+  }
+
+  /* Menú horizontal PC */
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  }
+
+  nav ul li a {
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+  /* Toggle con imagen */
+  .menu-toggle img {
+    width: 10px;
+    height: 35px;
+    cursor: pointer;
+  }
+
+  /* Toggle oculto en escritorio */
+  .menu-toggle {
+    display: none;
+  }
+
+  /* Responsive móvil */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: block;
+    }
+
+    nav ul {
+      position: fixed;
+      top: 70px;
+      right: 0;
+      background: #1c1c1c;
+      height: calc(100vh - 70px);
+      width: 220px;
+      flex-direction: column;
+      padding: 40px 20px;
+      gap: 20px;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 2000;
+    }
+
+    nav ul.show {
+      transform: translateX(0);
+    }
+  }
+ #menu a {
+    color: black;          /* Texto negro */
+    font-weight: bold;     /* Negrita */
+    text-decoration: none; /* Sin subrayado */
+    text-shadow: 
+      -1px -1px 0 white,  
+       1px -1px 0 white,
+      -1px  1px 0 white,
+       1px  1px 0 white;   /* Contorno blanco */
+  }
+</style>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('menu').classList.toggle('show');
+  }
+</script>
+
+</style>
+  <main>
+    <section id="inicio" class="section activo">
+      <div class="banner">
+        <div class="banner-content">
+          <h2>Transformá tu futuro profesional</h2>
+          <p>
+            En AcademiaCSI valoramos el desarrollo profesional y el aprendizaje continuo.
+            Te invitamos a enviar tu currículum vitae para formar parte de nuestro equipo y crecer juntos en un entorno de excelencia académica y profesional.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cursos" class="section">
+      <h3>Cursos Populares</h3>
+      <div class="card-container">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1612831661549-6d61dd994f79" alt="Curso Excel" />
+          <div class="card-body">
+            <h4>Excel Profesional</h4>
+            <p>Aprendé desde funciones básicas hasta dashboards avanzados.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1573497491208-6b1acb260507" alt="Curso Liderazgo" />
+          <div class="card-body">
+            <h4>Liderazgo Moderno</h4>
+            <p>Gestioná equipos de alto rendimiento con herramientas actuales.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1590608897129-79da98d159cc" alt="Curso Inglés" />
+          <div class="card-body">
+            <h4>Inglés para Negocios</h4>
+            <p>Comunicá con confianza en entornos profesionales internacionales.</p>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1573164574237-157000f2f898" alt="Curso Redes" />
+          <div class="card-body">
+            <h4>Marketing en Redes</h4>
+            <p>Dominá Instagram, TikTok, YouTube y convertí seguidores en clientes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="info" class="section">
+      <h2>¿Quiénes somos?</h2>
+  <p>Somos un equipo de profesionales que trabaja para ayudar a las empresas a mejorar continuamente y ser más eficientes, adaptándose a las exigencias actuales y al entorno competitivo 🚀.</p>
+
+  <h3>Nuestro enfoque</h3>
+  <p>Ofrecemos un servicio integral, brindando herramientas y recursos según las necesidades de cada empresa y su equipo, acompañándolos en su desarrollo y crecimiento 📈.</p>
+Creemos que el capital más importante de una organización son las personas. Por eso, nuestra manera de trabajar se basa en confidencialidad, respeto, seriedad y responsabilidad 🤝. Nos comprometemos con cada proyecto desde la empatía, la flexibilidad y fomentando la capacidad de aprendizaje de todos los que participan.</p>
+Nuestro objetivo es aportar innovación y beneficios concretos, logrando resultados que realmente sumen a la empresa 🌟.</p>
+<h1>Datos de contacto</h1>
+<p>Ubicación: Chile 97, Río Cuarto</p>
+<p>Email: csiconsultor4@gmail.com</p>
+</section>
+
+    <section id="unete" class="section">
+      <h3>Únete a nuestro equipo</h3>
+      <form
+        id="form-unete"
+        action="https://formsubmit.co/ornaghips4@gmail.com"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <label for="name">Tu nombre</label>
+        <input type="text" name="name" id="name" placeholder="Tu nombre" required />
+
+        <label for="email">Tu email</label>
+        <input type="email" name="email" id="email" placeholder="Tu email" required />
+
+        <label for="cv-upload">Subí tu CV</label>
+        <input
+          type="file"
+          name="CV"
+          id="cv-upload"
+          accept=".pdf,.doc,.docx"
+          required
+          onchange="document.getElementById('file-name').textContent = this.files[0]?.name || 'Ningún archivo seleccionado';"
+        />
+
+        <button
+          type="button"
+          id="btn-select-file"
+          onclick="document.getElementById('cv-upload').click();"
+          aria-label="Seleccionar archivo CV"
+        >
+          Seleccionar archivo
+        </button>
+        <span id="file-name">Ningún archivo seleccionado</span>
+
+        <input type="hidden" name="_captcha" value="false" />
+        <button type="submit" class="btn-primary">Enviar CV</button>
+      </form>
+    </section>
+
+    <!-- NUEVA SECCIÓN Contratá con Nosotros -->
+    <section id="Contratá con Nosotros" class="section">
+     <h1>Nuestros servicios</h1>
+<p>
+  Brindamos soluciones para la gestión de personas, ayudando a las empresas 
+  a fortalecer sus equipos y crecer en un entorno cada vez más competitivo.
+</p>
+
+<h1>¿Qué ofrecemos?</h1>
+<p>Ponemos a disposición de las organizaciones servicios adaptados a sus necesidades:</p>
+<ul>
+  <li>Procesos de búsqueda y selección de personal</li>
+  <li>Espacios de formación y capacitación</li>
+  <li>Informes psicológicos y aptos psicolaborales</li>
+  <li>Evaluación de desempeño</li>
+  <li>Gestión de pasantías (rentadas y/o ad honorem)</li>
+  <li>Evaluación de antecedentes laborales, comerciales, judiciales y financieros</li>
+  <li>Consultoría integral 📌</li>
+</ul>
+
+<h1>Nuestro compromiso</h1>
+<p>
+  Cada servicio está diseñado para aportar eficiencia, confianza y resultados concretos. 
+  Trabajamos con responsabilidad, seriedad y enfoque estratégico, asegurando soluciones 
+  que potencien el talento humano y el crecimiento sostenible de cada empresa.
+</p>
+      
+<button id="btnWhatsapp" class="btn-primary">Contactános</button>
+
+<!-- Opciones ocultas -->
+<div id="menuWhatsapp" style="display:none; margin-top:10px;">
+  <a href="https://wa.me/3584120044" target="_blank">📞 Contacto Natalia Vilar</a><br>
+  <a href="https://wa.me/3584378597" target="_blank">📞 Contacto Consultora CSI</a>
+</div>
+
+<script>
+  // Mostrar / ocultar las opciones de WhatsApp
+  document.getElementById("btnWhatsapp").addEventListener("click", function() {
+    let menu = document.getElementById("menuWhatsapp");
+    menu.style.display = menu.style.display === "none" ? "block" : "none";
+  });
+</script>
+        <h4 style="margin-top:20px;"></h4>
+        <ul id="cv-list"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 CSI Consultora - Todos los derechos reservados.</p>
+  </footer>
+
+  <script>
+    function mostrarSeccion(seccionId) {
+      document.querySelectorAll('.section').forEach((sec) => {
+        sec.classList.remove('activo');
+      });
+      document.getElementById(seccionId).classList.add('activo');
+      window.scrollTo(0, 0);
+
+      const menu = document.getElementById('menu');
+      if (menu.classList.contains('show')) {
+        menu.classList.remove('show');
+      }
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.classList.toggle('show');
+    }
+  </script>
+
+  <!-- FIREBASE Y CSI CLIENTES JS -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+  apiKey: "AIzaSyBelw7z3cqrSqX6fN0JNzX6rVO4l55YQv8",
+  authDomain: "ejemplonati-f52fe.firebaseapp.com",
+  databaseURL: "https://ejemplonati-f52fe-default-rtdb.firebaseio.com", // agregá esto
+  projectId: "ejemplonati-f52fe",
+  storageBucket: "ejemplonati-f52fe.appspot.com",
+  messagingSenderId: "1081751242376",
+  appId: "1:1081751242376:web:d2931c0340ed90a888c13d"
+};
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const storage = firebase.storage();
+
+    const password = "CSI123";
+
+    document.getElementById('btn-cv-clientes').addEventListener('click', () => {
+      const pass = prompt("Ingrese la contraseña:");
+      if(pass === password){
+        document.getElementById('cv-upload-section').style.display = "block";
+        loadCVs();
+      } else {
+        alert("Contraseña incorrecta");
+      }
+    });
+
+    document.getElementById('upload-btn').addEventListener('click', () => {
+      const file = document.getElementById('cv-file').files[0];
+      if(!file) return alert("Selecciona un archivo primero");
+
+      const storageRef = storage.ref('cvs/' + file.name);
+      storageRef.put(file).then(() => {
+        storageRef.getDownloadURL().then(url => {
+          const newCV = db.ref('cvs').push();
+          newCV.set({name: file.name, url: url});
+          alert("CV subido correctamente");
+        });
+      });
+    });
+
+    function loadCVs(){
+      const cvList = document.getElementById('cv-list');
+      db.ref('cvs').on('value', snapshot => {
+        cvList.innerHTML = "";
+        snapshot.forEach(child => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${child.val().url}" target="_blank">${child.val().name}</a>`;
+          cvList.appendChild(li);
+        });
+      });
+    }
+</script>
+</body>
+</html>
