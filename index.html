@@ -372,7 +372,7 @@
   <div class="logo">
     <img src="https://imgur.com/skIIvlg.jpg" alt="CSI Consultora Logo">
   </div>
-  <button class="menu-toggle" onclick="document.body.classList.toggle('menu-open')">
+  <button class="menu-toggle" onclick="document.getElementById('menu').classList.toggle('show')">
     ☰
   </button>
   <nav>
@@ -387,8 +387,8 @@
 </header>
 
 <style>
-
- .logo img {
+/* Logo */
+.logo img {
   height: 100px; 
   width: 150px;
   border-radius: 15px; 
@@ -422,18 +422,21 @@ nav ul li a {
   border-radius: 6px;
   display: inline-block;
   font-size: 14px;
+  transition: 0.3s ease;
 }
 
-/* Toggle con imagen */
-.menu-toggle img {
-  width: 25px;   /* Ajustado para que se vea mejor */
-  height: 25px;
-  cursor: pointer;
+nav ul li a:hover {
+  color: #ff4081; /* Hover rosa */
 }
 
-/* Toggle oculto en escritorio */
+/* Toggle */
 .menu-toggle {
   display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
 }
 
 /* Responsive móvil */
@@ -701,6 +704,7 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
 </body>
 
 </html>
+
 
 
 
