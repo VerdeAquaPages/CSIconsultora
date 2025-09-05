@@ -388,71 +388,27 @@
 
 <style>
 
-  .logo img {
+ .logo img {
   height: 100px; 
   width: 150px;
   border-radius: 15px; 
   border: 3px solid #3f72af; 
-  padding: 8px; /* 
+  padding: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
   background-color: white; 
-  }
+}
 
-  /* Menú horizontal PC */
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-  }
+/* Menú horizontal PC */
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
 
-  nav ul li a {
-    color: white;
-    font-weight: 600;
-    text-decoration: none;
-    font-size: 14px;
-  }
-
-  /* Toggle con imagen */
-  .menu-toggle img {
-    width: 10px;
-    height: 35px;
-    cursor: pointer;
-  }
-
-  /* Toggle oculto en escritorio */
-  .menu-toggle {
-    display: none;
-  }
-
-  /* Responsive móvil */
-  @media (max-width: 768px) {
-    .menu-toggle {
-      display: block;
-    }
-
-    nav ul {
-      position: fixed;
-      top: 70px;
-      right: 0;
-      background: #1c1c1c;
-      height: calc(100vh - 70px);
-      width: 220px;
-      flex-direction: column;
-      padding: 40px 20px;
-      gap: 20px;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      z-index: 2000;
-    }
-
-    nav ul.show {
-      transform: translateX(0);
-    }
-  }
-#menu a {
+nav ul li a {
   color: black;          /* Texto negro */
   font-weight: bold;     /* Negrita */
   text-decoration: none; /* Sin subrayado */
@@ -465,9 +421,46 @@
   padding: 4px 8px;
   border-radius: 6px;
   display: inline-block;
+  font-size: 14px;
 }
 
+/* Toggle con imagen */
+.menu-toggle img {
+  width: 25px;   /* Ajustado para que se vea mejor */
+  height: 25px;
+  cursor: pointer;
+}
+
+/* Toggle oculto en escritorio */
+.menu-toggle {
+  display: none;
+}
+
+/* Responsive móvil */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
   }
+
+  nav ul {
+    position: fixed;
+    top: 70px;
+    right: 0;
+    background: #1c1c1c;
+    height: calc(100vh - 70px);
+    width: 220px;
+    flex-direction: column;
+    padding: 40px 20px;
+    gap: 20px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 2000;
+  }
+
+  nav ul.show {
+    transform: translateX(0);
+  }
+}
 </style>
 
 <script>
@@ -708,6 +701,7 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
 </body>
 
 </html>
+
 
 
 
