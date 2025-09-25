@@ -407,9 +407,18 @@
   <div class="logo">
     <img src="https://imgur.com/skIIvlg.jpg" alt="CSI Consultora Logo">
   </div>
-  <button class="menu-toggle" onclick="document.getElementById('menu').classList.toggle('show')">
-    ☰
-  </button>
+ <button class="menu-toggle" id="menuButton" onclick="toggleMenuText()">
+  Menu
+</button>
+
+<script>
+  function toggleMenuText() {
+    const menu = document.getElementById('menu');
+    const btn = document.getElementById('menuButton');
+    menu.classList.toggle('show');
+    btn.textContent = menu.classList.contains('show') ? 'Cerrar' : 'Menu';
+  }
+</script>
   <nav>
     <ul id="menu">
       <li><a onclick="mostrarSeccion('inicio')">Inicio</a></li>
@@ -835,6 +844,7 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
 </body>
 
 </html>
+
 
 
 
