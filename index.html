@@ -407,23 +407,29 @@
   <div class="logo">
     <img src="https://imgur.com/skIIvlg.jpg" alt="CSI Consultora Logo">
   </div>
- <button class="menu-toggle" onclick="toggleMenu()">
-  Menu
-</button>
-<script>
-  function toggleMenu() {
-    document.getElementById('menu').classList.toggle('show');
-  }
-</script>
+
+  <button class="menu-toggle" onclick="toggleMenu()">
+    Menu
+  </button>
+
   <nav>
     <ul id="menu">
-      <li><a onclick="mostrarSeccion('inicio')">Inicio</a></li>
-      <li><a onclick="mostrarSeccion('cursos')">Cursos</a></li>
-      <li><a onclick="mostrarSeccion('info')">Quiénes Somos</a></li>
-      <li><a onclick="mostrarSeccion('unete')">Únete a nuestro equipo</a></li>
-      <li><a onclick="mostrarSeccion('Contratá con Nosotros')">Contratá con Nosotros</a></li>
+      <!-- 🔹 Nuevo botón para cerrar el menú -->
+      <li class="close-btn"><button onclick="toggleMenu()">✕</button></li>
+
+      <li><a onclick="mostrarSeccion('inicio'); toggleMenu()">Inicio</a></li>
+      <li><a onclick="mostrarSeccion('cursos'); toggleMenu()">Cursos</a></li>
+      <li><a onclick="mostrarSeccion('info'); toggleMenu()">Quiénes Somos</a></li>
+      <li><a onclick="mostrarSeccion('unete'); toggleMenu()">Únete a nuestro equipo</a></li>
+      <li><a onclick="mostrarSeccion('Contratá con Nosotros'); toggleMenu()">Contratá con Nosotros</a></li>
     </ul>
   </nav>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('menu').classList.toggle('show');
+    }
+  </script>
 </header>
 
 <style>
@@ -840,6 +846,7 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
 </body>
 
 </html>
+
 
 
 
