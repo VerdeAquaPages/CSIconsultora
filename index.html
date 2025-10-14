@@ -86,14 +86,24 @@
       user-select: none;
     }
 
-    @media (max-width: 768px) {
-  /* Header mantiene el logo a la izquierda y toggle a la derecha */
-  header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
+   .close-btn {
+  display: none; /* por defecto, oculto */
+}
+
+@media (max-width: 768px) {
+  .close-btn {
+    display: block; /* solo se muestra en pantallas pequeñas */
+    text-align: right;
+    margin-bottom: 10px;
   }
+
+  .close-btn button {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+}
 
   /* Toggle simple, sin fondo grande */
   .menu-toggle {
@@ -854,6 +864,7 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
 </body>
 
 </html>
+
 
 
 
