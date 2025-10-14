@@ -87,11 +87,43 @@
     }
 
    .close-btn {
-  display: none; /* por defecto, oculto */
+  display: none;
 }
 
+/* Botón de toggle del menú */
+.menu-toggle {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: white;
+  border: 2px solid #3f72af;
+  color: #3f72af;
+  border-radius: 8px;
+  padding: 6px 14px;
+  transition: all 0.3s ease;
+}
+
+/* Menú por defecto (oculto en móvil) */
+nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Links */
+nav ul li a {
+  text-decoration: none;
+  color: #3f72af;
+  font-weight: 600;
+  padding: 6px 12px;
+  display: block;
+}
+
+/* Estilos para móvil */
 @media (max-width: 768px) {
-  /* Header mantiene el logo a la izquierda y toggle a la derecha */
   header {
     flex-direction: row;
     justify-content: space-between;
@@ -99,21 +131,6 @@
     padding: 10px 20px;
   }
 
-  /* Toggle simple, sin fondo grande */
-  .menu-toggle {
-  display: block;
-  font-size: 28px;
-  font-weight: bold;         /* 🔹 Texto en negrita */
-  cursor: pointer;
-  background-color: white;   /* 🔹 Fondo blanco */
-  border: 2px solid #3f72af; /* 🔹 Borde azul */
-  color: #3f72af;            /* 🔹 Color del texto */
-  border-radius: 8px;        /* 🔹 Bordes redondeados */
-  padding: 6px 14px;         /* 🔹 Espaciado interno */
-  transition: all 0.3s ease; /* 🔹 Animación suave */
-}
-
-  /* Menú desplegable */
   nav ul {
     position: fixed;
     top: 60px;
@@ -135,17 +152,28 @@
     transform: translateX(0);
   }
 
-  /* Links del menú móviles */
-  nav ul li a {
-    font-size: 16px;
-    color: #3f72af;
-    background: rgba(63,114,175,0.1);
-    padding: 10px 15px;
-    border-radius: 6px;
+  /* Botón cerrar visible solo en móvil */
+  .close-btn {
     display: block;
+    text-align: right;
+    margin-bottom: 10px;
+  }
+
+  .close-btn button {
+    background: red;
+    color: white;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  nav ul li a {
+    background: rgba(63,114,175,0.1);
+    border-radius: 6px;
     text-align: center;
-    font-weight: 600;
-    text-decoration: none;
   }
 
   nav ul li a:hover {
@@ -153,7 +181,6 @@
     color: #27496d;
   }
 }
-
     main {
       flex-grow: 1;
       padding: 40px;
@@ -428,7 +455,6 @@
     <ul id="menu">
       <!-- 🔹 Nuevo botón para cerrar el menú -->
       <li class="close-btn"><button onclick="toggleMenu()">✕</button></li>
-
       <li><a onclick="mostrarSeccion('inicio'); toggleMenu()">Inicio</a></li>
       <li><a onclick="mostrarSeccion('cursos'); toggleMenu()">Cursos</a></li>
       <li><a onclick="mostrarSeccion('info'); toggleMenu()">Quiénes Somos</a></li>
@@ -885,6 +911,7 @@ window.addEventListener('resize', () => {
 </body>
 
 </html>
+
 
 
 
