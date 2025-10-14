@@ -855,9 +855,37 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
       });
     }
 </script>
+  <script>
+const menuToggle = document.getElementById('menu-toggle');
+const body = document.body;
+
+// Guardamos el texto original
+const originalText = menuToggle.textContent;
+
+menuToggle.addEventListener('click', () => {
+  body.classList.toggle('menu-open');
+
+  if (window.innerWidth <= 768) {
+    if (body.classList.contains('menu-open')) {
+      menuToggle.textContent = '✖'; // X para cerrar
+    } else {
+      menuToggle.textContent = originalText; // Volver a "Menu"
+    }
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) {
+    menuToggle.textContent = originalText;
+  } else if (!body.classList.contains('menu-open')) {
+    menuToggle.textContent = originalText;
+  }
+});
+</script>
 </body>
 
 </html>
+
 
 
 
