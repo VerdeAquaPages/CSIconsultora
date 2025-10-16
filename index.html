@@ -196,43 +196,72 @@ nav ul li a {
     }
 
     .banner {
-      background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c') center/cover no-repeat;
-      color: white;
-      padding: 120px 40px;
-      text-align: center;
-      position: relative;
-      border-radius: 10px;
-      margin-bottom: 40px;
-    }
+  background: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c')
+    center center / cover no-repeat;
+  color: white;
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 40px;
 
-    .banner::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      border-radius: 10px;
-      z-index: 0;
-    }
+  /* 🔹 Centrado absoluto y adaptable */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 
-    .banner-content {
-      position: relative;
-      z-index: 1;
-    }
+  /* 🔹 Altura adaptable */
+  min-height: 60vh;
+  padding: 60px 20px;
+  box-sizing: border-box;
+}
 
-    .banner h2 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
+.banner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.55); /* 🔹 Ligeramente más oscuro para mejor contraste */
+  border-radius: 10px;
+  z-index: 0;
+}
 
-    .banner p {
-      font-size: 18px;
-      max-width: 600px;
-      margin: auto;
-    }
+.banner-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 
+.banner h2 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.banner p {
+  font-size: 18px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* 🔹 Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .banner {
+    min-height: 50vh;
+    padding: 80px 20px;
+  }
+
+  .banner h2 {
+    font-size: 28px;
+  }
+
+  .banner p {
+    font-size: 16px;
+  }
+}
     .btn-primary {
       background: #3f72af;
       color: white;
@@ -911,6 +940,7 @@ window.addEventListener('resize', () => {
 </body>
 
 </html>
+
 
 
 
