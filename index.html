@@ -15,7 +15,125 @@
       display: flex;
       flex-direction: column;
     }
+<div class="banner-editable" id="bannerEditable" role="region" aria-label="Banner informativo">
+  <div class="banner-content">
+    <img id="bannerImg" src="https://via.placeholder.com/70x70.png?text=CSI" alt="Banner imagen">
+    <span id="bannerMsg">💼 Consultora CSI – Soluciones integrales para tu empresa</span>
+  </div>
+  <div class="banner-actions">
+    <button id="editBannerBtn" aria-label="Editar banner">✏️ Editar</button>
+    <button id="closeBannerBtn" aria-label="Cerrar banner">✕</button>
+  </div>
+</div>
 
+<!-- Panel de Edición -->
+<div class="banner-editor" id="bannerEditor" aria-hidden="true">
+  <h4>Editar Banner</h4>
+  <label for="bannerText">Texto:</label>
+  <textarea id="bannerText" rows="3"></textarea>
+  <label for="bannerImage">URL de Imagen:</label>
+  <input type="text" id="bannerImage" placeholder="https://...">
+  <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:8px;">
+    <button id="saveBanner">💾 Guardar</button>
+    <button id="cancelBanner">✖ Cancelar</button>
+  </div>
+</div>
+    .banner-editable {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #004aad, #007bff);
+  color: white;
+  padding: 10px 25px;
+  font-family: 'Montserrat', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.banner-editable .banner-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.banner-editable img {
+  height: 50px;
+  width: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.15);
+}
+
+.banner-editable .banner-actions button {
+  border: none;
+  background: rgba(255,255,255,0.15);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.banner-editable .banner-actions button:hover {
+  background: rgba(255,255,255,0.28);
+}
+
+/* Panel lateral editor */
+.banner-editor {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+  width: 300px;
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 3000;
+}
+
+.banner-editor h4 {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+  color: #003366;
+}
+
+.banner-editor textarea,
+.banner-editor input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #d0d7e6;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.banner-editor button {
+  background-color: #004aad;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.banner-editor button:hover {
+  background-color: #0062d1;
+}
+
+/* Ajuste para que el resto de la página no quede oculto por el banner */
+body { padding-top: 70px; } /* puedes ajustar 70px según la altura del banner */
+@media (max-width: 600px) {
+  .banner-editable { padding: 10px 12px; }
+  body { padding-top: 100px; } /* en móvil dejar más espacio si el banner ocupa más */
+  .banner-editor { width: 90%; left: 5%; right: 5%; top: 90px; }
+}
     .top-bar {
       background: #222;
       color: #eee;
@@ -908,9 +1026,102 @@ window.addEventListener('resize', () => {
   }
 });
 </script>
+  <script>
+  (function(){
+    const banner = document.getElementById("bannerEditable");
+    const bannerEditor = document.getElementById("bannerEditor");
+    const bannerMsg = document.getElementById("bannerMsg");
+    const bannerImg = document.getElementById("bannerImg");
+
+    const editBtn = document.getElementById("editBannerBtn");
+    const closeBtn = document.getElementById("closeBannerBtn");
+    const saveBtn = document.getElementById("saveBanner");
+    const cancelBtn = document.getElementById("cancelBanner");
+
+    const textInput = document.getElementById("bannerText");
+    const imgInput = document.getElementById("bannerImage");
+
+    // Abrir editor
+    editBtn.addEventListener("click", () => {
+      const isVisible = bannerEditor.style.display === "flex";
+      if(isVisible){
+        bannerEditor.style.display = "none";
+        bannerEditor.setAttribute('aria-hidden','true');
+      } else {
+        bannerEditor.style.display = "flex";
+        bannerEditor.setAttribute('aria-hidden','false');
+        textInput.value = bannerMsg.textContent.trim();
+        imgInput.value = bannerImg.src;
+      }
+    });
+
+    // Guardar cambios
+    saveBtn.addEventListener("click", () => {
+      const newText = textInput.value.trim();
+      const newImg = imgInput.value.trim();
+
+      if(newText.length === 0){
+        alert("El texto no puede quedar vacío.");
+        return;
+      }
+
+      bannerMsg.textContent = newText;
+      if(newImg) bannerImg.src = newImg;
+
+      // persistir en localStorage
+      try {
+        localStorage.setItem("bannerText", newText);
+        localStorage.setItem("bannerImage", bannerImg.src);
+        localStorage.removeItem("bannerClosed");
+      } catch(e){
+        console.warn("No se pudo guardar en localStorage:", e);
+      }
+
+      bannerEditor.style.display = "none";
+      bannerEditor.setAttribute('aria-hidden','true');
+    });
+
+    // Cancelar edición
+    cancelBtn.addEventListener("click", () => {
+      bannerEditor.style.display = "none";
+      bannerEditor.setAttribute('aria-hidden','true');
+    });
+
+    // Cerrar banner
+    closeBtn.addEventListener("click", () => {
+      banner.style.display = "none";
+      try { localStorage.setItem("bannerClosed","true"); } catch(e){}
+    });
+
+    // Cargar guardados
+    window.addEventListener("load", () => {
+      try {
+        const savedText = localStorage.getItem("bannerText");
+        const savedImg = localStorage.getItem("bannerImage");
+        const closed = localStorage.getItem("bannerClosed");
+        if (closed === "true") {
+          banner.style.display = "none";
+        }
+        if (savedText) bannerMsg.textContent = savedText;
+        if (savedImg) bannerImg.src = savedImg;
+      } catch(e){
+        console.warn("Error leyendo localStorage", e);
+      }
+    });
+
+    // Acceso por teclado amigable: ESC cierra el editor
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape'){
+        bannerEditor.style.display = 'none';
+        bannerEditor.setAttribute('aria-hidden','true');
+      }
+    });
+  })();
+</script>
 </body>
 
 </html>
+
 
 
 
