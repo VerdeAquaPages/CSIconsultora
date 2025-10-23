@@ -957,19 +957,37 @@ window.addEventListener('resize', () => {
 
 <style>
   /* 🔹 Banner fijo inferior */
+ /* 🔹 Banner fijo en PC */
+#banner-aviso {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(39, 73, 109, 0.95);
+  color: white;
+  padding: 10px 40px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* 🔹 Banner normal en móviles */
+@media (max-width: 768px) {
   #banner-aviso {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: rgba(39, 73, 109, 0.95);
-    color: white;
-    padding: 10px 40px;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 16px;
-    z-index: 9999;
-    overflow: hidden;
+    position: relative;  /* Ahora se comporta como un elemento normal */
+    bottom: auto;
+    width: auto;
+    margin: 20px 0;      /* Separación del contenido */
+    padding: 12px 20px;
+    border-radius: 10px; /* Opcional: bordes suaves en móvil */
   }
+
+  #banner-mensaje {
+    animation: mover 20s linear infinite; /* Ajustar velocidad si querés */
+    font-size: 14px;
+  }
+}
 
   /* 🔹 Texto animado */
   #banner-mensaje {
@@ -1082,6 +1100,7 @@ window.addEventListener('resize', () => {
 </body>
 
 </html>
+
 
 
 
