@@ -937,13 +937,15 @@ window.addEventListener('resize', () => {
   }
 });
 </script>
-  <!-- 🔹 Banner dinámico editable -->
+ <!-- 🔹 Banner público (visible siempre) -->
 <div id="banner-aviso">
   <div id="banner-mensaje">📢 Actualmente estamos buscando perfiles administrativos con experiencia en RRHH.</div>
-  <button id="editar-banner" title="Editar texto del banner">✏️</button>
 </div>
 
-<!-- 🔹 Modal de edición (oculto por defecto) -->
+<!-- 🔹 Botón para abrir panel de control (lo podés ubicar donde quieras) -->
+<button id="abrir-panel" class="panel-btn">Panel de control</button>
+
+<!-- 🔹 Modal para editar texto -->
 <div id="modal-editar-banner" class="oculto">
   <div class="contenido-modal">
     <h3>Editar mensaje del banner</h3>
@@ -962,7 +964,7 @@ window.addEventListener('resize', () => {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: rgba(39, 73, 109, 0.95); /* Azul oscuro semi-transparente */
+    background: rgba(39, 73, 109, 0.95);
     color: white;
     padding: 10px 40px;
     text-align: center;
@@ -972,7 +974,7 @@ window.addEventListener('resize', () => {
     overflow: hidden;
   }
 
-  /* 🔹 Texto desplazándose lentamente */
+  /* 🔹 Texto desplazándose */
   #banner-mensaje {
     display: inline-block;
     white-space: nowrap;
@@ -984,23 +986,25 @@ window.addEventListener('resize', () => {
     100% { transform: translateX(-100%); }
   }
 
-  /* 🔹 Botón editar */
-  #editar-banner {
-    position: absolute;
-    right: 10px;
-    bottom: 8px;
-    background: rgba(255,255,255,0.2);
+  /* 🔹 Botón "Panel de control" */
+  .panel-btn {
+    position: fixed;
+    bottom: 60px; /* un poco arriba del banner */
+    right: 20px;
+    background: #3f72af;
     color: white;
     border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 14px;
-    padding: 3px 8px;
-    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    z-index: 9999;
     transition: background 0.3s ease;
   }
 
-  #editar-banner:hover {
-    background: rgba(255,255,255,0.4);
+  .panel-btn:hover {
+    background: #27496d;
   }
 
   /* 🔹 Modal */
@@ -1055,9 +1059,9 @@ window.addEventListener('resize', () => {
 </style>
 
 <script>
-  const CLAVE = "csi2025"; // 🔑 Contraseña para editar
+  const CLAVE = "CSI2025"; // 🔑 Contraseña para editar
 
-  const btnEditar = document.getElementById("editar-banner");
+  const btnPanel = document.getElementById("abrir-panel");
   const modal = document.getElementById("modal-editar-banner");
   const btnGuardar = document.getElementById("guardar-banner");
   const btnCancelar = document.getElementById("cancelar-banner");
@@ -1065,8 +1069,8 @@ window.addEventListener('resize', () => {
   const inputMensaje = document.getElementById("nuevo-mensaje");
   const bannerMensaje = document.getElementById("banner-mensaje");
 
-  // 🔸 Abrir modal solo al tocar el botón
-  btnEditar.onclick = () => {
+  // 🔸 Abrir el panel de edición al presionar el botón "Panel de control"
+  btnPanel.onclick = () => {
     modal.classList.remove("oculto");
     inputMensaje.value = bannerMensaje.textContent;
   };
@@ -1097,6 +1101,7 @@ window.addEventListener('resize', () => {
 </body>
 
 </html>
+
 
 
 
