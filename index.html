@@ -940,10 +940,10 @@ window.addEventListener('resize', () => {
   <!-- 🔹 Banner dinámico editable -->
 <div id="banner-aviso">
   <div id="banner-mensaje">📢 Actualmente estamos buscando perfiles administrativos con experiencia en RRHH.</div>
-  <button id="editar-banner">✏️</button>
+  <button id="editar-banner" title="Editar texto del banner">✏️</button>
 </div>
 
-<!-- 🔹 Modal de edición -->
+<!-- 🔹 Modal de edición (oculto por defecto) -->
 <div id="modal-editar-banner" class="oculto">
   <div class="contenido-modal">
     <h3>Editar mensaje del banner</h3>
@@ -957,12 +957,12 @@ window.addEventListener('resize', () => {
 </div>
 
 <style>
-  /* Banner flotante inferior */
+  /* 🔹 Banner flotante inferior */
   #banner-aviso {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: rgba(39, 73, 109, 0.95); /* Azul oscuro, semi-transparente */
+    background: rgba(39, 73, 109, 0.95); /* Azul oscuro semi-transparente */
     color: white;
     padding: 10px 40px;
     text-align: center;
@@ -972,7 +972,7 @@ window.addEventListener('resize', () => {
     overflow: hidden;
   }
 
-  /* Texto desplazándose */
+  /* 🔹 Texto desplazándose lentamente */
   #banner-mensaje {
     display: inline-block;
     white-space: nowrap;
@@ -984,7 +984,7 @@ window.addEventListener('resize', () => {
     100% { transform: translateX(-100%); }
   }
 
-  /* Botón editar */
+  /* 🔹 Botón editar */
   #editar-banner {
     position: absolute;
     right: 10px;
@@ -996,9 +996,14 @@ window.addEventListener('resize', () => {
     font-size: 14px;
     padding: 3px 8px;
     border-radius: 6px;
+    transition: background 0.3s ease;
   }
 
-  /* Modal */
+  #editar-banner:hover {
+    background: rgba(255,255,255,0.4);
+  }
+
+  /* 🔹 Modal */
   #modal-editar-banner {
     position: fixed;
     top: 0; left: 0;
@@ -1010,7 +1015,9 @@ window.addEventListener('resize', () => {
     z-index: 10000;
   }
 
-  .oculto { display: none; }
+  .oculto {
+    display: none;
+  }
 
   .contenido-modal {
     background: white;
@@ -1021,7 +1028,8 @@ window.addEventListener('resize', () => {
     font-family: 'Montserrat', sans-serif;
   }
 
-  .contenido-modal input, .contenido-modal textarea {
+  .contenido-modal input,
+  .contenido-modal textarea {
     width: 100%;
     margin-top: 8px;
     margin-bottom: 10px;
@@ -1047,7 +1055,7 @@ window.addEventListener('resize', () => {
 </style>
 
 <script>
-  const CLAVE = "CSI2025"; // 🔑 Cambiá la contraseña si querés
+  const CLAVE = "csi2025"; // 🔑 Contraseña para editar
 
   const btnEditar = document.getElementById("editar-banner");
   const modal = document.getElementById("modal-editar-banner");
@@ -1057,13 +1065,13 @@ window.addEventListener('resize', () => {
   const inputMensaje = document.getElementById("nuevo-mensaje");
   const bannerMensaje = document.getElementById("banner-mensaje");
 
-  // Abrir modal
+  // 🔸 Abrir modal solo al tocar el botón
   btnEditar.onclick = () => {
     modal.classList.remove("oculto");
     inputMensaje.value = bannerMensaje.textContent;
   };
 
-  // Guardar mensaje si la clave es correcta
+  // 🔸 Guardar mensaje si la clave es correcta
   btnGuardar.onclick = () => {
     if (inputClave.value === CLAVE) {
       bannerMensaje.textContent = inputMensaje.value;
@@ -1075,12 +1083,12 @@ window.addEventListener('resize', () => {
     }
   };
 
-  // Cancelar edición
+  // 🔸 Cerrar modal sin guardar
   btnCancelar.onclick = () => {
     modal.classList.add("oculto");
   };
 
-  // Cargar mensaje guardado
+  // 🔸 Cargar mensaje guardado
   window.onload = () => {
     const guardado = localStorage.getItem("mensajeBanner");
     if (guardado) bannerMensaje.textContent = guardado;
@@ -1089,6 +1097,7 @@ window.addEventListener('resize', () => {
 </body>
 
 </html>
+
 
 
 
