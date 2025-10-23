@@ -937,13 +937,13 @@ window.addEventListener('resize', () => {
   }
 });
 </script>
- <!-- 🔹 Banner fijo inferior -->
+ <!-- 🔹 Banner visible para todos -->
 <div id="banner-aviso">
   <div id="banner-mensaje">📢 Actualmente estamos buscando perfiles administrativos con experiencia en RRHH.</div>
 </div>
 
-<!-- 🔹 Modal oculto para editar -->
-<div id="modal-editar-banner" class="oculto">
+<!-- 🔹 Modal SECRETO para editar -->
+<div id="modal-editar-banner" class="oculto" style="display: none;">
   <div class="contenido-modal">
     <h3>Editar mensaje del banner</h3>
     <input type="password" id="clave-banner" placeholder="Contraseña">
@@ -983,20 +983,16 @@ window.addEventListener('resize', () => {
     100% { transform: translateX(-100%); }
   }
 
-  /* 🔹 Modal */
+  /* 🔹 Modal oculto hasta que se active */
   #modal-editar-banner {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: rgba(0,0,0,0.5);
-    display: flex;
+    display: none; /* 🔒 Nada visible al inicio */
     align-items: center;
     justify-content: center;
     z-index: 10000;
-  }
-
-  .oculto {
-    display: none;
   }
 
   .contenido-modal {
@@ -1035,7 +1031,7 @@ window.addEventListener('resize', () => {
 </style>
 
 <script>
-  const CLAVE = "CSI2025"; // 🔑 Cambiá la contraseña si querés
+  const CLAVE = "CSI2025"; // 🔑 Cambiá tu contraseña
 
   const modal = document.getElementById("modal-editar-banner");
   const btnGuardar = document.getElementById("guardar-banner");
@@ -1044,45 +1040,49 @@ window.addEventListener('resize', () => {
   const inputMensaje = document.getElementById("nuevo-mensaje");
   const bannerMensaje = document.getElementById("banner-mensaje");
 
-  // 🔹 Doble espacio para abrir el panel
+  // 🔹 Doble espacio para abrir el panel secreto
   let ultimaPulsacion = 0;
   document.addEventListener("keydown", function(e) {
     if (e.code === "Space") {
       const ahora = Date.now();
-      if (ahora - ultimaPulsacion < 400) { // Si se presionó dos veces rápido
-        modal.classList.remove("oculto");
+      if (ahora - ultimaPulsacion < 400) { // Dos espacios rápidos
+        e.preventDefault();
+        modal.style.display = "flex"; // 🔓 Mostrar panel
         inputMensaje.value = bannerMensaje.textContent;
+        inputClave.focus();
       }
       ultimaPulsacion = ahora;
     }
   });
 
-  // 🔹 Guardar mensaje
+  // 🔹 Guardar mensaje (solo si la contraseña es correcta)
   btnGuardar.onclick = () => {
     if (inputClave.value === CLAVE) {
       bannerMensaje.textContent = inputMensaje.value;
       localStorage.setItem("mensajeBanner", inputMensaje.value);
-      modal.classList.add("oculto");
+      modal.style.display = "none";
       inputClave.value = "";
     } else {
       alert("Contraseña incorrecta");
     }
   };
 
-  // 🔹 Cancelar y cerrar
+  // 🔹 Cancelar
   btnCancelar.onclick = () => {
-    modal.classList.add("oculto");
+    modal.style.display = "none";
   };
 
   // 🔹 Cargar mensaje guardado al iniciar
   window.onload = () => {
     const guardado = localStorage.getItem("mensajeBanner");
     if (guardado) bannerMensaje.textContent = guardado;
+    modal.style.display = "none"; // 🔒 Asegurar que no se vea nunca al inicio
   };
 </script>
 </body>
 
 </html>
+
 
 
 
