@@ -937,15 +937,12 @@ window.addEventListener('resize', () => {
   }
 });
 </script>
- <!-- 🔹 Banner público (visible siempre) -->
+ <!-- 🔹 Banner fijo inferior -->
 <div id="banner-aviso">
   <div id="banner-mensaje">📢 Actualmente estamos buscando perfiles administrativos con experiencia en RRHH.</div>
 </div>
 
-<!-- 🔹 Botón para abrir panel de control (lo podés ubicar donde quieras) -->
-<button id="abrir-panel" class="panel-btn">Panel de control</button>
-
-<!-- 🔹 Modal para editar texto -->
+<!-- 🔹 Modal oculto para editar -->
 <div id="modal-editar-banner" class="oculto">
   <div class="contenido-modal">
     <h3>Editar mensaje del banner</h3>
@@ -959,7 +956,7 @@ window.addEventListener('resize', () => {
 </div>
 
 <style>
-  /* 🔹 Banner flotante inferior */
+  /* 🔹 Banner fijo inferior */
   #banner-aviso {
     position: fixed;
     bottom: 0;
@@ -974,7 +971,7 @@ window.addEventListener('resize', () => {
     overflow: hidden;
   }
 
-  /* 🔹 Texto desplazándose */
+  /* 🔹 Texto animado */
   #banner-mensaje {
     display: inline-block;
     white-space: nowrap;
@@ -984,27 +981,6 @@ window.addEventListener('resize', () => {
   @keyframes mover {
     0% { transform: translateX(100%); }
     100% { transform: translateX(-100%); }
-  }
-
-  /* 🔹 Botón "Panel de control" */
-  .panel-btn {
-    position: fixed;
-    bottom: 60px; /* un poco arriba del banner */
-    right: 20px;
-    background: #3f72af;
-    color: white;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    z-index: 9999;
-    transition: background 0.3s ease;
-  }
-
-  .panel-btn:hover {
-    background: #27496d;
   }
 
   /* 🔹 Modal */
@@ -1059,9 +1035,8 @@ window.addEventListener('resize', () => {
 </style>
 
 <script>
-  const CLAVE = "CSI2025"; // 🔑 Contraseña para editar
+  const CLAVE = "CSI2025"; // 🔑 Cambiá la contraseña si querés
 
-  const btnPanel = document.getElementById("abrir-panel");
   const modal = document.getElementById("modal-editar-banner");
   const btnGuardar = document.getElementById("guardar-banner");
   const btnCancelar = document.getElementById("cancelar-banner");
@@ -1069,13 +1044,20 @@ window.addEventListener('resize', () => {
   const inputMensaje = document.getElementById("nuevo-mensaje");
   const bannerMensaje = document.getElementById("banner-mensaje");
 
-  // 🔸 Abrir el panel de edición al presionar el botón "Panel de control"
-  btnPanel.onclick = () => {
-    modal.classList.remove("oculto");
-    inputMensaje.value = bannerMensaje.textContent;
-  };
+  // 🔹 Doble espacio para abrir el panel
+  let ultimaPulsacion = 0;
+  document.addEventListener("keydown", function(e) {
+    if (e.code === "Space") {
+      const ahora = Date.now();
+      if (ahora - ultimaPulsacion < 400) { // Si se presionó dos veces rápido
+        modal.classList.remove("oculto");
+        inputMensaje.value = bannerMensaje.textContent;
+      }
+      ultimaPulsacion = ahora;
+    }
+  });
 
-  // 🔸 Guardar mensaje si la clave es correcta
+  // 🔹 Guardar mensaje
   btnGuardar.onclick = () => {
     if (inputClave.value === CLAVE) {
       bannerMensaje.textContent = inputMensaje.value;
@@ -1087,12 +1069,12 @@ window.addEventListener('resize', () => {
     }
   };
 
-  // 🔸 Cerrar modal sin guardar
+  // 🔹 Cancelar y cerrar
   btnCancelar.onclick = () => {
     modal.classList.add("oculto");
   };
 
-  // 🔸 Cargar mensaje guardado
+  // 🔹 Cargar mensaje guardado al iniciar
   window.onload = () => {
     const guardado = localStorage.getItem("mensajeBanner");
     if (guardado) bannerMensaje.textContent = guardado;
@@ -1101,6 +1083,7 @@ window.addEventListener('resize', () => {
 </body>
 
 </html>
+
 
 
 
