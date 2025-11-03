@@ -1049,7 +1049,7 @@ window.addEventListener('resize', () => {
 </style>
 
 <script>
-  const CLAVE = "CSI2025"; // 🔑 Cambiá tu contraseña
+  const CLAVE = "CSI2025"; // 🔑 Contraseña
 
   const modal = document.getElementById("modal-editar-banner");
   const btnGuardar = document.getElementById("guardar-banner");
@@ -1058,14 +1058,28 @@ window.addEventListener('resize', () => {
   const inputMensaje = document.getElementById("nuevo-mensaje");
   const bannerMensaje = document.getElementById("banner-mensaje");
 
+  // 🔹 Inicializar Firebase
+  const firebaseConfig = {
+  apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
+    authDomain: "csiconsultoranati.firebaseapp.com",
+    databaseURL: "https://csiconsultoranati-default-rtdb.firebaseio.com",
+    projectId: "csiconsultoranati",
+    storageBucket: "csiconsultoranati.appspot.com",
+    messagingSenderId: "375075276694",
+    appId: "1:375075276694:web:d7ac75a7b69725bb2a7fb7"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
   // 🔹 Doble espacio para abrir el panel secreto
   let ultimaPulsacion = 0;
   document.addEventListener("keydown", function(e) {
     if (e.code === "Space") {
       const ahora = Date.now();
-      if (ahora - ultimaPulsacion < 400) { // Dos espacios rápidos
+      if (ahora - ultimaPulsacion < 400) {
         e.preventDefault();
-        modal.style.display = "flex"; // 🔓 Mostrar panel
+        modal.style.display = "flex";
+        inputClave.value = "";
         inputMensaje.value = bannerMensaje.textContent;
         inputClave.focus();
       }
@@ -1073,13 +1087,19 @@ window.addEventListener('resize', () => {
     }
   });
 
-  // 🔹 Guardar mensaje (solo si la contraseña es correcta)
+  // 🔹 Guardar mensaje en Firebase
   btnGuardar.onclick = () => {
     if (inputClave.value === CLAVE) {
-      bannerMensaje.textContent = inputMensaje.value;
-      localStorage.setItem("mensajeBanner", inputMensaje.value);
-      modal.style.display = "none";
-      inputClave.value = "";
+      const nuevoMensaje = inputMensaje.value;
+      db.ref('banner/mensaje').set(nuevoMensaje)
+        .then(() => {
+          bannerMensaje.textContent = nuevoMensaje;
+          modal.style.display = "none";
+          inputClave.value = "";
+        })
+        .catch(err => {
+          alert("Error guardando en Firebase: " + err.message);
+        });
     } else {
       alert("Contraseña incorrecta");
     }
@@ -1090,20 +1110,19 @@ window.addEventListener('resize', () => {
     modal.style.display = "none";
   };
 
-  // 🔹 Cargar mensaje guardado al iniciar
+  // 🔹 Cargar mensaje guardado de Firebase al iniciar
+  db.ref('banner/mensaje').on('value', snapshot => {
+    const mensaje = snapshot.val();
+    if (mensaje) bannerMensaje.textContent = mensaje;
+  });
+
   window.onload = () => {
-    const guardado = localStorage.getItem("mensajeBanner");
-    if (guardado) bannerMensaje.textContent = guardado;
-    modal.style.display = "none"; // 🔒 Asegurar que no se vea nunca al inicio
+    modal.style.display = "none";
   };
 </script>
-  <script type="module">
-  // Import the functions you need from the SDKs you need
+ <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
 
-  // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
     authDomain: "csiconsultoranati.firebaseapp.com",
@@ -1114,12 +1133,12 @@ window.addEventListener('resize', () => {
     appId: "1:375075276694:web:d7ac75a7b69725bb2a7fb7"
   };
 
-  // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 </script>
 </body>
 
 </html>
+
 
 
 
