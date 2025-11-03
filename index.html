@@ -1097,9 +1097,30 @@ window.addEventListener('resize', () => {
     modal.style.display = "none"; // 🔒 Asegurar que no se vea nunca al inicio
   };
 </script>
+  <script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
+    authDomain: "csiconsultoranati.firebaseapp.com",
+    databaseURL: "https://csiconsultoranati-default-rtdb.firebaseio.com",
+    projectId: "csiconsultoranati",
+    storageBucket: "csiconsultoranati.firebasestorage.app",
+    messagingSenderId: "375075276694",
+    appId: "1:375075276694:web:d7ac75a7b69725bb2a7fb7"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
 </body>
 
 </html>
+
 
 
 
