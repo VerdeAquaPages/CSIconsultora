@@ -937,9 +937,82 @@ window.addEventListener('resize', () => {
   }
 });
 </script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+<script>
+  const CLAVE = "CSI2025"; // 🔑 Contraseña
+
+  const modal = document.getElementById("modal-editar-banner");
+  const btnGuardar = document.getElementById("guardar-banner");
+  const btnCancelar = document.getElementById("cancelar-banner");
+  const inputClave = document.getElementById("clave-banner");
+  const inputMensaje = document.getElementById("nuevo-mensaje");
+  const bannerMensaje = document.getElementById("banner-mensaje");
+
+  // 🔹 Inicializar Firebase (v8)
+  const firebaseConfig = {
+    apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
+    authDomain: "csiconsultoranati.firebaseapp.com",
+    databaseURL: "https://csiconsultoranati-default-rtdb.firebaseio.com",
+    projectId: "csiconsultoranati",
+    storageBucket: "csiconsultoranati.appspot.com",
+    messagingSenderId: "375075276694",
+    appId: "1:375075276694:web:d7ac75a7b69725bb2a7fb7"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // 🔹 Doble espacio abre el editor oculto
+  let ultimaPulsacion = 0;
+  document.addEventListener("keydown", function(e) {
+    if (e.code === "Space") {
+      const ahora = Date.now();
+      if (ahora - ultimaPulsacion < 400) {
+        e.preventDefault();
+        modal.style.display = "flex";
+        inputClave.value = "";
+        inputMensaje.value = bannerMensaje.textContent;
+        inputClave.focus();
+      }
+      ultimaPulsacion = ahora;
+    }
+  });
+
+  // 🔹 Guardar mensaje
+  btnGuardar.onclick = () => {
+    if (inputClave.value === CLAVE) {
+      const nuevoMensaje = inputMensaje.value;
+      db.ref('banner/mensaje').set(nuevoMensaje)
+        .then(() => {
+          bannerMensaje.textContent = nuevoMensaje;
+          modal.style.display = "none";
+          inputClave.value = "";
+        })
+        .catch(err => {
+          alert("Error guardando en Firebase: " + err.message);
+        });
+    } else {
+      alert("Contraseña incorrecta");
+    }
+  };
+
+  // 🔹 Cancelar
+  btnCancelar.onclick = () => {
+    modal.style.display = "none";
+  };
+
+  // 🔹 Cargar mensaje desde Firebase
+  db.ref('banner/mensaje').on('value', snapshot => {
+    const mensaje = snapshot.val();
+    if (mensaje) bannerMensaje.textContent = mensaje;
+  });
+</script>
 </body>
 
 </html>
+
 
 
 
