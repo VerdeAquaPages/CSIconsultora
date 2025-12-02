@@ -883,8 +883,31 @@ window.addEventListener('resize', () => {
 });
 </script>
 
+<div id="banner-aviso">
+  <div id="banner-mensaje">📢 Actualmente estamos buscando perfiles administrativos con experiencia en RRHH.</div>
+</div>
+
+<!-- 🔹 Modal oculto para editar -->
+<div id="modal-editar-banner" class="oculto" style="display:none;">
+  <div class="contenido-modal">
+    <h3>Editar mensaje del banner</h3>
+    <input type="password" id="clave-banner" placeholder="Contraseña">
+    <textarea id="nuevo-mensaje" rows="3"></textarea>
+    <div class="acciones-modal">
+      <button id="guardar-banner">Guardar</button>
+      <button id="cancelar-banner">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<!-- 🔹 Firebase v8 -->
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
 <script>
-  const CLAVE = "CSI2025"; // 🔑 Contraseña
+document.addEventListener("DOMContentLoaded", function () {
+
+  const CLAVE = "CSI2025";
 
   const modal = document.getElementById("modal-editar-banner");
   const btnGuardar = document.getElementById("guardar-banner");
@@ -893,7 +916,7 @@ window.addEventListener('resize', () => {
   const inputMensaje = document.getElementById("nuevo-mensaje");
   const bannerMensaje = document.getElementById("banner-mensaje");
 
-  // 🔹 Inicializar Firebase (v8)
+  // 🔹 Firebase config
   const firebaseConfig = {
     apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
     authDomain: "csiconsultoranati.firebaseapp.com",
@@ -907,7 +930,7 @@ window.addEventListener('resize', () => {
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // 🔹 Doble espacio abre el editor oculto
+  // 🔹 Doble espacio para abrir editor
   let ultimaPulsacion = 0;
   document.addEventListener("keydown", function(e) {
     if (e.code === "Space") {
@@ -927,15 +950,11 @@ window.addEventListener('resize', () => {
   btnGuardar.onclick = () => {
     if (inputClave.value === CLAVE) {
       const nuevoMensaje = inputMensaje.value;
-      db.ref('banner/mensaje').set(nuevoMensaje)
-        .then(() => {
-          bannerMensaje.textContent = nuevoMensaje;
-          modal.style.display = "none";
-          inputClave.value = "";
-        })
-        .catch(err => {
-          alert("Error guardando en Firebase: " + err.message);
-        });
+      db.ref("banner/mensaje").set(nuevoMensaje)
+      .then(() => {
+        bannerMensaje.textContent = nuevoMensaje;
+        modal.style.display = "none";
+      });
     } else {
       alert("Contraseña incorrecta");
     }
@@ -947,14 +966,17 @@ window.addEventListener('resize', () => {
   };
 
   // 🔹 Cargar mensaje desde Firebase
-  db.ref('banner/mensaje').on('value', snapshot => {
+  db.ref("banner/mensaje").on("value", snapshot => {
     const mensaje = snapshot.val();
     if (mensaje) bannerMensaje.textContent = mensaje;
   });
+
+});
 </script>
 </body>
 
 </html>
+
 
 
 
