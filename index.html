@@ -1040,19 +1040,26 @@ const db = firebase.database();
     }
   });
 
-  // 🔹 Guardar mensaje
-  btnGuardar.onclick = () => {
-    if (inputClave.value === CLAVE) {
-      const nuevoMensaje = inputMensaje.value;
-      db.ref("banner/mensaje").set(nuevoMensaje)
-      .then(() => {
-        bannerMensaje.textContent = nuevoMensaje;
-        modal.style.display = "none";
-      });
-    } else {
-      alert("Contraseña incorrecta");
-    }
-  };
+  btnGuardar.addEventListener("click", function () {
+
+  if (inputClave.value !== CLAVE) {
+    alert("Contraseña incorrecta");
+    return;
+  }
+
+  const nuevoMensaje = inputMensaje.value;
+
+  db.ref("banner/mensaje").set(nuevoMensaje)
+    .then(() => {
+      modal.style.display = "none";
+    })
+    .catch(error => {
+      alert("Error al guardar en Firebase");
+      console.error(error);
+    });
+
+});
+
 
   // 🔹 Cancelar
   btnCancelar.onclick = () => {
@@ -1070,6 +1077,7 @@ const db = firebase.database();
 </body>
 
 </html>
+
 
 
 
