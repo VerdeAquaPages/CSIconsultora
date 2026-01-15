@@ -993,7 +993,6 @@ window.addEventListener('resize', () => {
 </style>
 
 <!-- 🔹 Firebase v8 -->
-<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 
 <script>
@@ -1009,18 +1008,21 @@ document.addEventListener("DOMContentLoaded", function () {
   const bannerMensaje = document.getElementById("banner-mensaje");
 
   // 🔹 Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
-    authDomain: "csiconsultoranati.firebaseapp.com",
-    databaseURL: "https://csiconsultoranati-default-rtdb.firebaseio.com",
-    projectId: "csiconsultoranati",
-    storageBucket: "csiconsultoranati.appspot.com",
-    messagingSenderId: "375075276694",
-    appId: "1:375075276694:web:d7ac75a7b69725bb2a7fb7"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
+  authDomain: "csiconsultoranati.firebaseapp.com",
+  databaseURL: "https://csiconsultoranati-default-rtdb.firebaseio.com",
+  projectId: "csiconsultoranati",
+  storageBucket: "csiconsultoranati.appspot.com",
+  messagingSenderId: "375075276694",
+  appId: "1:375075276694:web:d7ac75a7b69725bb2a7fb7"
+};
 
+if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+}
+
+const db = firebase.database();
 
   // 🔹 Doble espacio para abrir editor
   let ultimaPulsacion = 0;
@@ -1068,6 +1070,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </body>
 
 </html>
+
 
 
 
