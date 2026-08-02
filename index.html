@@ -1112,7 +1112,18 @@ window.addEventListener('resize', () => {
     menuToggle.textContent = originalText;
   }
 });
-      if (ahora - ultimoEspacio < 400) {
+  
+<script>
+
+let ultimoEspacio = 0;
+
+document.addEventListener("keydown", function(e) {
+
+  if (e.code === "Space") {
+
+    let ahora = Date.now();
+
+    if (ahora - ultimoEspacio < 400) {
 
       e.preventDefault();
 
@@ -1132,6 +1143,7 @@ document.getElementById("cerrar-editor").onclick = function() {
 };
 
 </script>
+
 </script>
 
 
