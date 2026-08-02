@@ -852,11 +852,13 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
       </div>
     </section>
   </main>
+<!-- 🔹 BANNER INFERIOR -->
 <div id="banner-aviso">
   <div id="banner-mensaje">
     📢 Cargando aviso...
   </div>
 </div>
+
 
 <style>
 /* 🔹 Banner fijo inferior */
@@ -902,9 +904,58 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
     transform: translateX(-100%);
   }
 }
+
+
+/* 🔹 Ventana administrador oculta */
+#editor-banner {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+}
+
+
+#editor-banner .caja-editor {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 320px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+#editor-banner input,
+#editor-banner textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+
+#editor-banner button {
+  margin: 5px;
+  padding: 8px 14px;
+  background: #3f72af;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
 </style>
-   <div style="background:white; padding:20px; border-radius:10px; width:320px; text-align:center;">
-    
+
+
+
+<!-- 🔒 EDITOR OCULTO (NO SE VE AL ENTRAR) -->
+<div id="editor-banner">
+
+  <div class="caja-editor">
+
     <h3>Editar banner</h3>
 
     <input id="email-admin" type="email" placeholder="Correo">
@@ -916,12 +967,14 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
     <br>
 
     <button id="entrar-admin">Entrar</button>
+
     <button id="guardar-banner">Guardar</button>
+
     <button id="cerrar-editor">Cerrar</button>
 
   </div>
 
-</div>
+</div></div>
   <footer>
     <p>&copy; 2026 C&C Consultora - Todos los derechos reservados.</p>
   </footer>
