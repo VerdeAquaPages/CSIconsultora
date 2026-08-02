@@ -1112,6 +1112,26 @@ window.addEventListener('resize', () => {
     menuToggle.textContent = originalText;
   }
 });
+      if (ahora - ultimoEspacio < 400) {
+
+      e.preventDefault();
+
+      document.getElementById("editor-banner").style.display = "flex";
+
+    }
+
+    ultimoEspacio = ahora;
+  }
+
+});
+
+
+// Cerrar editor
+document.getElementById("cerrar-editor").onclick = function() {
+  document.getElementById("editor-banner").style.display = "none";
+};
+
+</script>
 </script>
 
 
