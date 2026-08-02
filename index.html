@@ -903,6 +903,25 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
   }
 }
 </style>
+   <div style="background:white; padding:20px; border-radius:10px; width:320px; text-align:center;">
+    
+    <h3>Editar banner</h3>
+
+    <input id="email-admin" type="email" placeholder="Correo">
+
+    <input id="password-admin" type="password" placeholder="Contraseña">
+
+    <textarea id="nuevo-mensaje-banner" rows="4"></textarea>
+
+    <br>
+
+    <button id="entrar-admin">Entrar</button>
+    <button id="guardar-banner">Guardar</button>
+    <button id="cerrar-editor">Cerrar</button>
+
+  </div>
+
+</div>
   <footer>
     <p>&copy; 2026 C&C Consultora - Todos los derechos reservados.</p>
   </footer>
@@ -921,6 +940,57 @@ db.ref("banner/mensaje").on("value", (snapshot) => {
   }
 
 });
+  let editor = document.getElementById("editor-banner");
+
+
+// Abrir editor con doble click en el banner
+document.getElementById("banner-aviso").ondblclick = () => {
+  editor.style.display = "flex";
+};
+
+
+// Cerrar
+document.getElementById("cerrar-editor").onclick = () => {
+  editor.style.display = "none";
+};
+
+
+// Login Firebase
+document.getElementById("entrar-admin").onclick = () => {
+
+  let email = document.getElementById("email-admin").value;
+  let pass = document.getElementById("password-admin").value;
+
+  firebase.auth().signInWithEmailAndPassword(email, pass)
+  .then(() => {
+
+    alert("Acceso permitido");
+
+    db.ref("banner/mensaje").once("value")
+    .then(snapshot => {
+      document.getElementById("nuevo-mensaje-banner").value = snapshot.val();
+    });
+
+  })
+  .catch(() => {
+    alert("Datos incorrectos");
+  });
+
+};
+
+
+// Guardar nuevo texto
+document.getElementById("guardar-banner").onclick = () => {
+
+  let texto = document.getElementById("nuevo-mensaje-banner").value;
+
+  db.ref("banner/mensaje").set(texto)
+  .then(() => {
+    alert("Banner actualizado");
+    editor.style.display = "none";
+  });
+
+};
   <script>
 const firebaseConfig = {
   apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
