@@ -860,6 +860,183 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
 </div>
 
 
+<!-- 🔒 EDITOR OCULTO -->
+<div id="editor-banner">
+
+  <div class="caja-editor">
+
+    <h3>Editar banner</h3>
+
+    <textarea id="nuevo-mensaje-banner" rows="4"></textarea>
+
+    <br>
+
+    <button id="guardar-banner">Guardar</button>
+    <button id="cerrar-editor">Cerrar</button>
+
+  </div>
+
+</div>
+
+
+<style>
+
+#banner-aviso {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(39, 73, 109, 0.95);
+  color: white;
+  padding: 10px 40px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+
+#banner-mensaje {
+  display: inline-block;
+  white-space: nowrap;
+  animation: mover 15s linear infinite;
+}
+
+
+@keyframes mover {
+
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+
+}
+
+
+@media (max-width:768px){
+
+  #banner-aviso {
+    position:relative;
+    width:auto;
+    margin:20px 0;
+    padding:12px 20px;
+    border-radius:10px;
+  }
+
+}
+
+
+/* 🔒 EDITOR ESCONDIDO */
+
+#editor-banner {
+
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  z-index:10000;
+  align-items:center;
+  justify-content:center;
+
+}
+
+
+.caja-editor {
+
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  width:320px;
+  text-align:center;
+
+}
+
+
+.caja-editor textarea {
+
+  width:100%;
+  padding:8px;
+
+}
+
+
+.caja-editor button {
+
+  background:#3f72af;
+  color:white;
+  border:none;
+  padding:8px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  margin:5px;
+
+}
+
+</style>
+
+
+<script>
+
+// Cargar banner desde Firebase
+
+db.ref("banner/mensaje").on("value", function(snapshot){
+
+  let mensaje = snapshot.val();
+
+  if(mensaje){
+
+    document.getElementById("banner-mensaje").textContent =
+    "📢 " + mensaje;
+
+  }
+
+});
+
+
+
+// Abrir editor con doble espacio
+
+let ultimoEspacio = 0;
+
+
+document.addEventListener("keydown", function(e){
+
+  if(e.code === "Space"){
+
+    let ahora = Date.now();
+
+
+    if(ahora - ultimoEspacio < 400){
+
+      document.getElementById("editor-banner").style.display = "flex";
+
+    }
+
+
+    ultimoEspacio = ahora;
+
+  }
+
+});
+
+
+
+// Cerrar editor
+
+document.getElementById("cerrar-editor").onclick = function(){
+
+  document.getElementById("editor-banner").style.display = "none";
+
+};
+
+
+</script>
 <style>
 /* 🔹 Banner fijo inferior */
 #banner-aviso {
@@ -1113,39 +1290,7 @@ window.addEventListener('resize', () => {
   }
 });
   
-<script>
-
-let ultimoEspacio = 0;
-
-document.addEventListener("keydown", function(e) {
-
-  if (e.code === "Space") {
-
-    let ahora = Date.now();
-
-    if (ahora - ultimoEspacio < 400) {
-
-      e.preventDefault();
-
-      document.getElementById("editor-banner").style.display = "flex";
-
-    }
-
-    ultimoEspacio = ahora;
-  }
-
-});
-
-
-// Cerrar editor
-document.getElementById("cerrar-editor").onclick = function() {
-  document.getElementById("editor-banner").style.display = "none";
-};
-
 </script>
-
-</script>
-
 
 </body>
 
