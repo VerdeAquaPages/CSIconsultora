@@ -853,8 +853,56 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
     </section>
   </main>
 <div id="banner-aviso">
-  <span id="banner-mensaje">Cargando aviso...</span>
+  <div id="banner-mensaje">
+    📢 Cargando aviso...
+  </div>
 </div>
+
+<style>
+/* 🔹 Banner fijo inferior */
+#banner-aviso {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(39, 73, 109, 0.95);
+  color: white;
+  padding: 10px 40px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* 🔹 Móvil */
+@media (max-width: 768px) {
+  #banner-aviso {
+    position: relative;
+    bottom: auto;
+    width: auto;
+    margin: 20px 0;
+    padding: 12px 20px;
+    border-radius: 10px;
+  }
+}
+
+/* 🔹 Texto moviéndose */
+#banner-mensaje {
+  display: inline-block;
+  white-space: nowrap;
+  animation: mover 15s linear infinite;
+}
+
+@keyframes mover {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+</style>
   <footer>
     <p>&copy; 2026 C&C Consultora - Todos los derechos reservados.</p>
   </footer>
@@ -862,6 +910,17 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  // Cargar banner desde Firebase
+
+db.ref("banner/mensaje").on("value", (snapshot) => {
+
+  const mensaje = snapshot.val();
+
+  if (mensaje) {
+    document.getElementById("banner-mensaje").textContent = "📢 " + mensaje;
+  }
+
+});
   <script>
 const firebaseConfig = {
   apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
