@@ -929,7 +929,9 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
-  // Cargar banner desde Firebase
+<script>
+
+// Cargar banner desde Firebase
 
 db.ref("banner/mensaje").on("value", (snapshot) => {
 
@@ -940,7 +942,9 @@ db.ref("banner/mensaje").on("value", (snapshot) => {
   }
 
 });
-  let editor = document.getElementById("editor-banner");
+
+
+let editor = document.getElementById("editor-banner");
 
 
 // Abrir editor con doble click en el banner
@@ -991,6 +995,8 @@ document.getElementById("guardar-banner").onclick = () => {
   });
 
 };
+
+</script>
   <script>
 const firebaseConfig = {
   apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
