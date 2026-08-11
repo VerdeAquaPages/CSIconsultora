@@ -844,14 +844,22 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
       </div>
     </section>
   </main>
-<!-- 🔹 BANNER INFERIOR -->
+<!-- =========================================================
+     🔵 BANNER INFERIOR
+========================================================= -->
+
 <div id="banner-aviso">
   <div id="banner-mensaje">
     📢 Cargando aviso...
   </div>
 </div>
 
+
 <style>
+
+/* =========================
+   BANNER
+========================= */
 
 #banner-aviso {
   position: fixed;
@@ -866,7 +874,6 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
   z-index: 9999;
   overflow: hidden;
 }
-
 
 #banner-mensaje {
   display: inline-block;
@@ -874,9 +881,7 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
   animation: mover 15s linear infinite;
 }
 
-
 @keyframes mover {
-
   0% {
     transform: translateX(100%);
   }
@@ -884,92 +889,15 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
   100% {
     transform: translateX(-100%);
   }
-
 }
 
 
-@media (max-width:768px){
+/* =========================
+   BANNER EN CELULAR
+========================= */
 
-  #banner-aviso {
-    position:relative;
-    width:auto;
-    margin:20px 0;
-    padding:12px 20px;
-    border-radius:10px;
-  }
-
-}
-
-
-/* 🔒 EDITOR ESCONDIDO */
-
-#editor-banner {
-
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.5);
-  z-index:10000;
-  align-items:center;
-  justify-content:center;
-
-}
-
-
-.caja-editor {
-
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  width:320px;
-  text-align:center;
-
-}
-
-
-.caja-editor textarea {
-
-  width:100%;
-  padding:8px;
-
-}
-
-
-.caja-editor button {
-
-  background:#3f72af;
-  color:white;
-  border:none;
-  padding:8px 14px;
-  border-radius:6px;
-  cursor:pointer;
-  margin:5px;
-
-}
-
-</style>
-
-<style>
-/* 🔹 Banner fijo inferior */
-#banner-aviso {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: rgba(39, 73, 109, 0.95);
-  color: white;
-  padding: 10px 40px;
-  text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  z-index: 9999;
-  overflow: hidden;
-}
-
-/* 🔹 Móvil */
 @media (max-width: 768px) {
+
   #banner-aviso {
     position: relative;
     bottom: auto;
@@ -978,37 +906,23 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
     padding: 12px 20px;
     border-radius: 10px;
   }
-}
 
-/* 🔹 Texto moviéndose */
-#banner-mensaje {
-  display: inline-block;
-  white-space: nowrap;
-  animation: mover 15s linear infinite;
-}
-
-@keyframes mover {
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
 }
 
 
-/* 🔹 Ventana administrador oculta */
+/* =========================
+   EDITOR DEL BANNER
+========================= */
+
 #editor-banner {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 10000;
   align-items: center;
   justify-content: center;
 }
-
 
 #editor-banner .caja-editor {
   background: white;
@@ -1019,7 +933,6 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
   font-family: 'Montserrat', sans-serif;
 }
 
-
 #editor-banner input,
 #editor-banner textarea {
   width: 100%;
@@ -1027,7 +940,6 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
   padding: 8px;
   box-sizing: border-box;
 }
-
 
 #editor-banner button {
   margin: 5px;
@@ -1042,171 +954,429 @@ Nuestro objetivo es aportar innovación y beneficios concretos, logrando resulta
 </style>
 
 
+<!-- =========================================================
+     🔒 EDITOR DEL BANNER
+========================================================= -->
 
-<!-- 🔒 EDITOR OCULTO (NO SE VE AL ENTRAR) -->
 <div id="editor-banner">
 
   <div class="caja-editor">
 
     <h3>Editar banner</h3>
 
-    <input id="email-admin" type="email" placeholder="Correo">
+    <input
+      id="email-admin"
+      type="email"
+      placeholder="Correo"
+    >
 
-    <input id="password-admin" type="password" placeholder="Contraseña">
+    <input
+      id="password-admin"
+      type="password"
+      placeholder="Contraseña"
+    >
 
-    <textarea id="nuevo-mensaje-banner" rows="4"></textarea>
+    <textarea
+      id="nuevo-mensaje-banner"
+      rows="4"
+      placeholder="Escribí el nuevo mensaje"
+    ></textarea>
 
     <br>
 
-    <button id="entrar-admin">Entrar</button>
+    <button id="entrar-admin">
+      Entrar
+    </button>
 
-    <button id="guardar-banner">Guardar</button>
+    <button id="guardar-banner">
+      Guardar
+    </button>
 
-    <button id="cerrar-editor">Cerrar</button>
+    <button id="cerrar-editor">
+      Cerrar
+    </button>
 
   </div>
 
-</div></div>
-  <footer>
-    <p>&copy; 2026 C&C Consultora - Todos los derechos reservados.</p>
-  </footer>
-  
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+</div>
+
+
+<!-- =========================================================
+     🔵 FIREBASE
+========================================================= -->
+
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+
+
 <script>
 
-// Cargar banner desde Firebase
+const firebaseConfig = {
 
-db.ref("banner/mensaje").on("value", (snapshot) => {
+  apiKey: "AIzaSyAD_mmaLsokRtPkNke5LVWkE4FBcUKWB8",
+
+  authDomain: "csiconsultoranati.firebaseapp.com",
+
+  databaseURL: "https://csiconsultoranati-default-rtdb.firebaseio.com",
+
+  projectId: "csiconsultoranati",
+
+  storageBucket: "csiconsultoranati.firebasestorage.app",
+
+  messagingSenderId: "375075276694",
+
+  appId: "1:375075276694:web:d7ac75a7b69725bb2a7fb7"
+
+};
+
+
+firebase.initializeApp(firebaseConfig);
+
+
+const db = firebase.database();
+
+const auth = firebase.auth();
+
+</script>
+
+
+<!-- =========================================================
+     🟢 FUNCIONES DEL BANNER
+========================================================= -->
+
+<script>
+
+/* =========================
+   REFERENCIAS
+========================= */
+
+const editorBanner =
+  document.getElementById("editor-banner");
+
+const bannerAviso =
+  document.getElementById("banner-aviso");
+
+const cerrarEditor =
+  document.getElementById("cerrar-editor");
+
+const entrarAdmin =
+  document.getElementById("entrar-admin");
+
+const guardarBanner =
+  document.getElementById("guardar-banner");
+
+const emailAdmin =
+  document.getElementById("email-admin");
+
+const passwordAdmin =
+  document.getElementById("password-admin");
+
+const nuevoMensaje =
+  document.getElementById("nuevo-mensaje-banner");
+
+
+/* =========================
+   CARGAR BANNER
+========================= */
+
+db.ref("banner/mensaje").on("value", function(snapshot) {
 
   const mensaje = snapshot.val();
 
   if (mensaje) {
-    document.getElementById("banner-mensaje").textContent = "📢 " + mensaje;
+
+    document.getElementById("banner-mensaje").textContent =
+      "📢 " + mensaje;
+
   }
 
 });
 
 
-let editor = document.getElementById("editor-banner");
+/* =========================
+   ABRIR EDITOR
+   DOBLE ESPACIO
+========================= */
+
+let ultimoEspacio = 0;
+
+document.addEventListener("keydown", function(e) {
+
+  if (e.code !== "Space") return;
+
+  const ahora = Date.now();
+
+  if (ahora - ultimoEspacio < 400) {
+
+    editorBanner.style.display = "flex";
+
+  }
+
+  ultimoEspacio = ahora;
+
+});
 
 
-// Abrir editor con doble click en el banner
-document.getElementById("banner-aviso").ondblclick = () => {
-  editor.style.display = "flex";
-};
+/* =========================
+   CERRAR EDITOR
+========================= */
+
+cerrarEditor.addEventListener("click", function() {
+
+  editorBanner.style.display = "none";
+
+});
 
 
-// Cerrar
-document.getElementById("cerrar-editor").onclick = () => {
-  editor.style.display = "none";
-};
+/* =========================
+   ENTRAR COMO ADMINISTRADOR
+========================= */
+
+entrarAdmin.addEventListener("click", function() {
+
+  const email = emailAdmin.value.trim();
+
+  const password = passwordAdmin.value;
 
 
-// Login Firebase
-document.getElementById("entrar-admin").onclick = () => {
+  if (!email || !password) {
 
-  let email = document.getElementById("email-admin").value;
-  let pass = document.getElementById("password-admin").value;
+    alert("Completá el correo y la contraseña.");
 
-  firebase.auth().signInWithEmailAndPassword(email, pass)
-  .then(() => {
+    return;
 
-    alert("Acceso permitido");
+  }
 
-    db.ref("banner/mensaje").once("value")
-    .then(snapshot => {
-      document.getElementById("nuevo-mensaje-banner").value = snapshot.val();
+
+  firebase.auth()
+    .signInWithEmailAndPassword(email, password)
+
+    .then(function() {
+
+      alert("Acceso permitido.");
+
+      return db.ref("banner/mensaje").once("value");
+
+    })
+
+    .then(function(snapshot) {
+
+      const mensaje = snapshot.val();
+
+      nuevoMensaje.value = mensaje || "";
+
+    })
+
+    .catch(function(error) {
+
+      console.error(error);
+
+      alert("Datos incorrectos.");
+
     });
 
-  })
-  .catch(() => {
-    alert("Datos incorrectos");
-  });
-
-};
+});
 
 
-// Guardar nuevo texto
-document.getElementById("guardar-banner").onclick = () => {
+/* =========================
+   GUARDAR BANNER
+========================= */
 
-  let texto = document.getElementById("nuevo-mensaje-banner").value;
+guardarBanner.addEventListener("click", function() {
 
-  db.ref("banner/mensaje").set(texto)
-  .then(() => {
-    alert("Banner actualizado");
-    editor.style.display = "none";
-  });
+  const usuario = firebase.auth().currentUser;
 
-};
+
+  if (!usuario) {
+
+    alert("Primero tenés que iniciar sesión.");
+
+    return;
+
+  }
+
+
+  const texto = nuevoMensaje.value.trim();
+
+
+  if (!texto) {
+
+    alert("Escribí un mensaje.");
+
+    return;
+
+  }
+
+
+  db.ref("banner/mensaje")
+    .set(texto)
+
+    .then(function() {
+
+      alert("Banner actualizado.");
+
+      editorBanner.style.display = "none";
+
+    })
+
+    .catch(function(error) {
+
+      console.error(error);
+
+      alert("No se pudo actualizar el banner.");
+
+    });
+
+});
+
+
+/* =========================
+   CERRAR HACIENDO CLICK
+   FUERA DE LA CAJA
+========================= */
+
+editorBanner.addEventListener("click", function(e) {
+
+  if (e.target === editorBanner) {
+
+    editorBanner.style.display = "none";
+
+  }
+
+});
 
 </script>
-  <script>
-const firebaseConfig = {
-  apiKey: "AIzaSyAD_mmaLsokRtPkNke5LV9WkE4FBcUKWB8",
-  authDomain: "csiconsultoranati.firebaseapp.com",
-  databaseURL: "https://csiconsultoranati-default-rtdb.firebaseio.com",
-  projectId: "csiconsultoranati",
-  storageBucket: "csiconsultoranati.firebasestorage.app",
-  messagingSenderId: "375075276694",
-  appId: "1:375075276694:web:d7ac75a7b69725bb2a7fb7"
-};
 
-firebase.initializeApp(firebaseConfig);
 
-const db = firebase.database();
-const auth = firebase.auth();
+<!-- =========================================================
+     🟠 NAVEGACIÓN DE LA PÁGINA
+========================================================= -->
+
+<script>
+
+function mostrarSeccion(seccionId) {
+
+  document.querySelectorAll('.section').forEach(function(sec) {
+
+    sec.classList.remove('activo');
+
+  });
+
+
+  const seccion =
+    document.getElementById(seccionId);
+
+
+  if (seccion) {
+
+    seccion.classList.add('activo');
+
+  }
+
+
+  window.scrollTo(0, 0);
+
+
+  const menu =
+    document.getElementById('menu');
+
+
+  if (menu && menu.classList.contains('show')) {
+
+    menu.classList.remove('show');
+
+  }
+
+}
+
+
+function toggleMenu() {
+
+  const menu =
+    document.getElementById('menu');
+
+
+  if (menu) {
+
+    menu.classList.toggle('show');
+
+  }
+
+}
+
 </script>
-  
-  <script>
-    function mostrarSeccion(seccionId) {
-      document.querySelectorAll('.section').forEach((sec) => {
-        sec.classList.remove('activo');
-      });
-      document.getElementById(seccionId).classList.add('activo');
-      window.scrollTo(0, 0);
 
-      const menu = document.getElementById('menu');
-      if (menu.classList.contains('show')) {
-        menu.classList.remove('show');
+
+<!-- =========================================================
+     🟠 BOTÓN DEL MENÚ
+========================================================= -->
+
+<script>
+
+const menuToggle =
+  document.getElementById('menu-toggle');
+
+const body =
+  document.body;
+
+
+if (menuToggle) {
+
+  const originalText =
+    menuToggle.textContent;
+
+
+  menuToggle.addEventListener('click', function() {
+
+    body.classList.toggle('menu-open');
+
+
+    if (window.innerWidth <= 768) {
+
+      if (body.classList.contains('menu-open')) {
+
+        menuToggle.textContent = '✖';
+
+      } else {
+
+        menuToggle.textContent = originalText;
+
       }
+
     }
 
-    function toggleMenu() {
-      const menu = document.getElementById('menu');
-      menu.classList.toggle('show');
+  });
+
+
+  window.addEventListener('resize', function() {
+
+    if (window.innerWidth > 768) {
+
+      menuToggle.textContent = originalText;
+
+    } else if (!body.classList.contains('menu-open')) {
+
+      menuToggle.textContent = originalText;
+
     }
-  </script>
-  <script>
-const menuToggle = document.getElementById('menu-toggle');
-const body = document.body;
 
-// Guardamos el texto original
-const originalText = menuToggle.textContent;
+  });
 
-menuToggle.addEventListener('click', () => {
-  body.classList.toggle('menu-open');
+}
 
-  if (window.innerWidth <= 768) {
-    if (body.classList.contains('menu-open')) {
-      menuToggle.textContent = '✖'; // X para cerrar
-    } else {
-      menuToggle.textContent = originalText; // Volver a "Menu"
-    }
-  }
-});
-
-window.addEventListener('resize', () => {
-  if (window.innerWidth > 768) {
-    menuToggle.textContent = originalText;
-  } else if (!body.classList.contains('menu-open')) {
-    menuToggle.textContent = originalText;
-  }
-});
-  
 </script>
 
+
+<footer>
+
+  <p>
+    &copy; 2026 C&C Consultora - Todos los derechos reservados.
+  </p>
+
+</footer>
 </body>
 
 </html>
