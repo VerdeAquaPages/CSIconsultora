@@ -1171,13 +1171,8 @@ entrarAdmin.addEventListener("click", function() {
     })
 
     .catch(function(error) {
-
-  console.error("ERROR DE FIREBASE:", error);
-
-  alert(
-    "Error de inicio de sesión:\n\n" +
-    error.code + "\n" +
-    error.message
+  console.error("ERROR FIREBASE:", error);
+  alert(error.code + "\n\n" + error.message);
   );
 
 });
