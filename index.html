@@ -1280,6 +1280,385 @@ if (menuToggle) {
 }
 
 </script>
+```html
+<!-- =========================================================
+     🟦 VENTANA MÁS INFO DE TODOS LOS CURSOS
+========================================================= -->
+
+<div id="modal-curso" class="modal-curso">
+
+  <div class="modal-contenido">
+
+    <button class="modal-cerrar" onclick="cerrarCurso()">✕</button>
+
+    <h2 id="modal-titulo"></h2>
+
+    <div id="modal-texto"></div>
+
+  </div>
+
+</div>
+
+
+<style>
+
+.modal-curso {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 99999;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.modal-contenido {
+  background: white;
+  width: 100%;
+  max-width: 650px;
+  max-height: 85vh;
+
+  overflow-y: auto;
+
+  border-radius: 18px;
+  padding: 30px;
+
+  box-sizing: border-box;
+
+  position: relative;
+
+  box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+
+  animation: aparecerCurso 0.3s ease;
+}
+
+.modal-contenido h2 {
+  color: #3f72af;
+  font-size: 28px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.modal-contenido p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.modal-contenido ul {
+  padding-left: 25px;
+  line-height: 1.7;
+}
+
+.modal-cerrar {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+
+  width: 38px;
+  height: 38px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #3f72af;
+  color: white;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  cursor: pointer;
+}
+
+.modal-cerrar:hover {
+  background: #27496d;
+}
+
+@keyframes aparecerCurso {
+
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .modal-contenido {
+    padding: 25px 20px;
+    max-height: 90vh;
+  }
+
+  .modal-contenido h2 {
+    font-size: 23px;
+  }
+
+}
+
+</style>
+
+
+<script>
+
+function abrirCurso(curso) {
+
+  const modal = document.getElementById("modal-curso");
+  const titulo = document.getElementById("modal-titulo");
+  const texto = document.getElementById("modal-texto");
+
+
+  /* MARKETING DIGITAL */
+
+  if (curso === "marketing") {
+
+    titulo.innerHTML = "💻 ¡Curso de Marketing Digital!";
+
+    texto.innerHTML = `
+      <p>¡Vas a aprender a vender por internet utilizando las mejores herramientas digitales disponibles!</p>
+
+      <p>👩‍💻 <strong>Modalidad:</strong> 100% virtual</p>
+
+      <p>⏳ <strong>Duración:</strong> 3 meses</p>
+
+      <p>💰 <strong>Inversión:</strong> consultar por precios y promociones vigentes.</p>
+
+      <p>📜 Se entrega certificado.</p>
+
+      <p>📦 <strong>Modalidad enlatada:</strong> no abona inscripción y puede comenzar en cualquier momento.</p>
+    `;
+
+  }
+
+
+  /* TALLER CONTABLE */
+
+  else if (curso === "Taller contable impositivo") {
+
+    titulo.innerHTML = "📊 Taller Contable Impositivo";
+
+    texto.innerHTML = `
+      <p>🎯 <strong>Objetivo:</strong> mejorar tu desempeño en el ámbito empresarial y contable.</p>
+
+      <p>📘 <strong>¿Qué vas a aprender?</strong></p>
+
+      <ul>
+        <li>Monotributo y facturación electrónica</li>
+        <li>Ingresos brutos</li>
+        <li>IVA e impuesto a las ganancias</li>
+        <li>Conciliaciones bancarias y arqueo de caja</li>
+        <li>Liquidación de sueldos y cargas sociales</li>
+      </ul>
+
+      <p>🌐 <strong>Modalidad:</strong> 100% virtual</p>
+
+      <p>📆 <strong>Inicio:</strong> en cualquier momento (modalidad enlatada).</p>
+
+      <p>💵 <strong>Inversión:</strong> inscripción para modalidad enlatada sin cargo.</p>
+
+      <p>ℹ️ Para modalidad de clases en vivo, consultar inicio y precio.</p>
+
+      <p>📜 Se entrega certificado.</p>
+    `;
+
+  }
+
+
+  /* MONOTRIBUTO */
+
+  else if (curso === "Taller de Monotributo & Facturación Electrónica") {
+
+    titulo.innerHTML = "🧾 Taller de Monotributo & Facturación Electrónica";
+
+    texto.innerHTML = `
+      <p>📣 <strong>¿Qué vas a aprender?</strong></p>
+
+      <ul>
+        <li>Obtención de clave fiscal y CUIT</li>
+        <li>Alta en monotributo</li>
+        <li>Facturación electrónica</li>
+        <li>Recategorización y mucho más</li>
+      </ul>
+
+      <p>💻 <strong>Modalidad:</strong> 100% virtual</p>
+
+      <p>📆 <strong>Inicio:</strong> a confirmar para modalidad en vivo. Para modalidad enlatada comienza en cualquier momento.</p>
+
+      <p>💳 <strong>Inversión:</strong> inscripción y cuotas mensuales (consultar precio al momento de inscribirse).</p>
+
+      <p>📦 Para modalidad enlatada, inscripción sin cargo.</p>
+
+      <p>📜 Se entrega certificado.</p>
+    `;
+
+  }
+
+
+  /* EDUCACIÓN FINANCIERA */
+
+  else if (curso === "Taller de Educacion Financiera") {
+
+    titulo.innerHTML = "💡 Taller de Educación Financiera";
+
+    texto.innerHTML = `
+      <p>📘 <strong>Aprenderás:</strong></p>
+
+      <ul>
+        <li>Finanzas personales</li>
+        <li>Objetivos financieros personales</li>
+        <li>Creencias limitantes</li>
+        <li>Deudas buenas y malas</li>
+        <li>Emociones y deudas</li>
+        <li>El juego del dinero y el cuadrante</li>
+      </ul>
+
+      <p>🌐 <strong>Modalidad:</strong> 100% virtual</p>
+
+      <p>📅 <strong>Inicio:</strong> en cualquier momento (modalidad enlatada)</p>
+
+      <p>⏳ <strong>Duración:</strong> 4 clases</p>
+
+      <p>💵 <strong>Inversión:</strong> inscripción sin cargo en modalidad enlatada.</p>
+
+      <p>🏅 Se entrega certificado.</p>
+
+      <p>ℹ️ Consultar por precios y fecha de inicio para modalidad en vivo.</p>
+    `;
+
+  }
+
+
+  /* LIQUIDACIÓN DE SUELDOS */
+
+  else if (curso === "Liquidación de sueldos") {
+
+    titulo.innerHTML = "📑 Liquidación de Sueldos";
+
+    texto.innerHTML = `
+      <p>📘 <strong>Aprenderás:</strong></p>
+
+      <ul>
+        <li>Conceptos básicos de la liquidación</li>
+        <li>Cálculo de vacaciones, SAC, entre otros</li>
+        <li>Liquidación para empleadas domésticas</li>
+        <li>F931 y marco legal</li>
+        <li>Y mucho más</li>
+      </ul>
+
+      <p>🌐 <strong>Modalidad:</strong> 100% virtual</p>
+
+      <p>📆 <strong>Inicio:</strong> modalidad enlatada en cualquier momento</p>
+
+      <p>⏳ <strong>Duración:</strong> 2 meses</p>
+
+      <p>💳 <strong>Inversión:</strong> inscripción modalidad enlatada sin cargo (solo abona las cuotas).</p>
+
+      <p>ℹ️ Para modalidad en vivo consultar inicio y precio.</p>
+
+      <p>🎓 Se entrega certificado.</p>
+    `;
+
+  }
+
+
+  /* EXCEL */
+
+  else if (curso === "Excel para Empresas") {
+
+    titulo.innerHTML = "📊 Excel para Empresas";
+
+    texto.innerHTML = `
+      <p>🎯 <strong>Objetivo:</strong> brindar las herramientas necesarias para aplicar en tareas diarias de una oficina.</p>
+
+      <p>📘 <strong>Aprenderás:</strong> conceptos básicos del libro de Excel, funciones, filtros, manejo de base de datos, formato condicional, tablas dinámicas, gráficos, macros y mucho más.</p>
+
+      <p>💻 <strong>Modalidad:</strong> virtual</p>
+
+      <p>⏱ <strong>Inicio:</strong> cuando el alumno quiera iniciar</p>
+
+      <p>💵 <strong>Inversión:</strong> inscripción y cuotas mensuales (consultar precio).</p>
+
+      <p>🏆 Se entrega certificado.</p>
+
+      <p>ℹ️ Consultar por promociones vigentes al momento de inscribirse.</p>
+    `;
+
+  }
+
+
+  /* ADMINISTRACIÓN AGROPECUARIA */
+
+  else if (curso === "Curso Administración de Empresas Agropecuarias") {
+
+    titulo.innerHTML = "🌾 Administración de Empresas Agropecuarias";
+
+    texto.innerHTML = `
+      <p>👥 <strong>Destinado a:</strong> toda persona que trabaje o tenga relación con el sector agropecuario, como productor, empleado o administrador.</p>
+
+      <p>🎯 <strong>Objetivo:</strong> brindar conocimientos sobre determinación de costos, ingresos, planificación de tareas y elaboración de planes de inversión.</p>
+
+      <p>📘 <strong>¿Qué vas a aprender?</strong></p>
+
+      <p>El estudiante adquirirá conocimientos vinculados a la administración, control de gestión, planificación de actividades, análisis de indicadores productivos, económicos y financieros, y construcción de registros tanto en actividades agrícolas como pecuarias.</p>
+
+      <p>👩‍💻 <strong>Modalidad:</strong> 100% virtual</p>
+
+      <p>⏳ <strong>Duración:</strong> 4 meses</p>
+
+      <p>💰 <strong>Inversión:</strong> consultar por precios y promociones vigentes.</p>
+
+      <p>📜 Se entrega certificado.</p>
+
+      <p>📦 <strong>Modalidad enlatada:</strong> no abona inscripción y puede comenzar en cualquier momento.</p>
+    `;
+
+  }
+
+
+  modal.style.display = "flex";
+
+}
+
+
+function cerrarCurso() {
+
+  document.getElementById("modal-curso").style.display = "none";
+
+}
+
+
+document.getElementById("modal-curso").addEventListener("click", function(e) {
+
+  if (e.target === this) {
+
+    cerrarCurso();
+
+  }
+
+});
+
+
+document.addEventListener("keydown", function(e) {
+
+  if (e.key === "Escape") {
+
+    cerrarCurso();
+
+  }
+
+});
+
+</script>
+```
 
 
 <footer>
